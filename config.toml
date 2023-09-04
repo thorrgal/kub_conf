@@ -1,9 +1,7 @@
-version = 2
-
 root = "/var/lib/containerd"
 state = "/run/containerd"
 oom_score = 0
-imports = ["/etc/containerd/runtime_*.toml", "./debug.toml"]
+imports = ["/etc/containerd/runtime_*.toml"]
 
 [grpc]
   address = "/run/containerd/containerd.sock"
@@ -40,3 +38,6 @@ imports = ["/etc/containerd/runtime_*.toml", "./debug.toml"]
   [plugins."io.containerd.service.v1.tasks-service"]
     blockio_config_file = ""
     rdt_config_file = ""
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+      SystemdCgroup = true
